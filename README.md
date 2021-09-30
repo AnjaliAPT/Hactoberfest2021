@@ -1,2 +1,5 @@
-# Hactoberfest2021
-Hactoberfest2021
+# Hactoberfest 2021
+
+The repository hosts project that aids hacktoberfest
+
+
