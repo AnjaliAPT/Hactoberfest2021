@@ -1,0 +1,76 @@
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// A Binary Tree Node
+struct BT_Node
+{
+	int data;
+	struct BT_Node *left, *right;
+};
+
+// function to create a new tree node
+BT_Node* newNode(int data)
+{
+	BT_Node *temp = new BT_Node;
+	temp->data = data;
+	temp->left = temp->right = NULL;
+	return temp;
+}
+
+// function to print left view of
+// binary tree
+void printLeftView(BT_Node* root)
+{
+	if (!root)
+		return;
+
+	queue<BT_Node*> q;
+	q.push(root);
+
+	while (!q.empty())
+	{	
+		// number of nodes at current level
+		int n = q.size();
+		
+		// Traverse all nodes of current level
+		for(int i = 1; i <= n; i++)
+		{
+			BT_Node* temp = q.front();
+			q.pop();
+				
+			// Print the left most element
+			// at the level
+			if (i == 1)
+				cout<<temp->data<<" ";
+			
+			// Add left node to queue
+			if (temp->left != NULL)
+				q.push(temp->left);
+
+			// Add right node to queue
+			if (temp->right != NULL)
+				q.push(temp->right);
+		}
+	}
+}	
+
+
+int main()
+{
+	
+
+	BT_Node* root = newNode(4);
+	root->left = newNode(5);
+	root->right = newNode(2);
+	root->right->left = newNode(3);
+	
+	root->right->right = newNode(1);
+	root->right->left->left = newNode(6);
+  
+	root->right->left->right = newNode(7);
+
+	printLeftView(root);
+}
+
