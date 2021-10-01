@@ -3,7 +3,7 @@
 // https : //www.geeksforgeeks.org/array-rotation/
 
 #include <stdio.h>
-
+//#include <conio.h>
 void rotate(int[], int, int);
 int gcd(int, int);
 
