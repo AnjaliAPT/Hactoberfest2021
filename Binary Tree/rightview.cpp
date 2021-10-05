@@ -12,33 +12,31 @@ struct Node
         left = right = NULL;
     }
 };
-void rightView(Node *root)
-{
-   // Your Code here
-   if(!root)
-    return;
-    queue<Node*> q;
-    q.push(root);
-    while(!q.empty()){
-        int currsize=q.size();
-        int last=0;
-        while(currsize--){
-            Node *temp=q.front();
-            q.pop();
-            last=temp->data;
-            if(temp->left)
-             q.push(temp->left);
-            if(temp->right)
-             q.push(temp->right);
-        }
-        cout<<last<<" ";
+vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       vector<int>ans;
+       queue<Node*>q;
+       q.push(root);
+       while(!q.empty()){
+           int n = q.size();
+           for(int i = 0;i<n;i++){
+               Node*a = q.front();
+               q.pop();
+               if(i==n-1) ans.push_back(a->data);
+               if(a->left) q.push(a->left);
+               if(a->right) q.push(a->right);
+           }
+       }
+       return ans;
     }
-}
 int main(){
     Node *root=new Node(1);
     root->left=new Node(2);
     root->right=new Node(3);
     root->left->left=new Node(4);
     root->right->right=new Node(5);
+    vector<int>ans=rightView(root)
+    for (int i:ans) cout<<i<<" ";
     return 0;
 }
