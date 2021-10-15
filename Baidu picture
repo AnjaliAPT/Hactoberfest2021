@@ -1,0 +1,29 @@
+import requests
+import re
+import time
+url = "http://image.baidu.com/search/index?tn=baiduimage&word= Picachu“
+urls = requests.get(url)    # Open link
+urltext = urls.text     # Get all link text
+urlre = re.compile('"objURL":"(.*?)"', re.S)    # Writing regular expressions
+urllist = urlre.findall(urltext)    # Match by regular
+
+with open("1.txt", "w") as txt:     # Write matching link to file
+    for i in urllist:
+        txt.write(i + "\n")
+i = 0
+
+# Loop through the list and download pictures
+for urlimg in urllist:
+    time.sleep(3)   # Program sleep for three seconds
+    img = requests.get(urlimg, timeout = 5).content     # Open picture links in binary form
+    if img:
+        with open(str(i) + ".jpg", "wb") as imgs:   # Create a new jpg file to write in binary
+            print("Downloading section%s Pictures %s" % (str(i+1), urlimg))
+            imgs.write(img)     #Write picture to
+            i += 1
+        if i == 3:  #To avoid unlimited downloads, set the download picture as 3 here
+            break
+    else:
+        print("Download failed!")
+
+print("Download completed!")
